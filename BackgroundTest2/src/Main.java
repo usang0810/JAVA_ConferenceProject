@@ -7,11 +7,12 @@ public class Main {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//MainFrame main = new MainFrame();
+		MainFrame main = new MainFrame();
 		//MenuFrame menu = new MenuFrame();
 		//ConferenceFrame cf = new ConferenceFrame();
 		//Test test = new Test();
-		CalendarFrameTest cftest = new CalendarFrameTest();
+		//CalendarFrameTest cftest = new CalendarFrameTest();
+		
 	}
 
 }

@@ -28,6 +28,15 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	public ImageIcon signupbackground_image = new ImageIcon(MainFrame.class.getResource("/images/signup_background.png"));
 	public ImageIcon signupbefore_image = new ImageIcon(MainFrame.class.getResource("/images/signup_before.png"));
 	public ImageIcon signupafter_image = new ImageIcon(MainFrame.class.getResource("/images/signup_after.png"));
+	public ImageIcon menubackground_image = new ImageIcon(MainFrame.class.getResource("/images/menu_background.png"));
+	public ImageIcon calendarbefore_image = new ImageIcon(MainFrame.class.getResource("/images/calendar_before.png"));
+	public ImageIcon calendarafter_image = new ImageIcon(MainFrame.class.getResource("/images/calendar_after.png"));
+	public ImageIcon chatbefore_image = new ImageIcon(MainFrame.class.getResource("/images/chat_before.png"));
+	public ImageIcon chatafter_image = new ImageIcon(MainFrame.class.getResource("/images/chat_after.png"));
+	public ImageIcon coinbefore_image = new ImageIcon(MainFrame.class.getResource("/images/coin_before.png"));
+	public ImageIcon coinafter_image = new ImageIcon(MainFrame.class.getResource("/images/coin_after.png"));
+	public ImageIcon setbefore_image = new ImageIcon(MainFrame.class.getResource("/images/set_before.png"));
+	public ImageIcon setafter_image = new ImageIcon(MainFrame.class.getResource("/images/set_after.png"));
 	
 	public JPanel login_panel, signup_panel, menu_panel;
 	private JButton login_button, login_signup_button, signup_signup_button, calendar_button, chat_button, set_button, coin_button;
@@ -256,29 +265,45 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 		getContentPane().setLayout(null);
 		menu_panel.setLayout(null);
 		
-		calendar_button = new JButton("New button");
-		calendar_button.setBounds(467, 58, 150, 150);
+		calendar_button = new JButton();
+		calendar_button.setBounds(85, 259, 160, 160);
+		calendar_button.setIcon(calendarbefore_image);
+		calendar_button.setBorderPainted(false);
+		calendar_button.setContentAreaFilled(false);
+		calendar_button.setFocusPainted(false);
 		menu_panel.add(calendar_button);
-		calendar_button.addActionListener(this);
+		calendar_button.addMouseListener(this);
 		
-		chat_button = new JButton("New button");
-		chat_button.setBounds(680, 58, 150, 150);
+		chat_button = new JButton();
+		chat_button.setBounds(271, 259, 160, 160);
+		chat_button.setIcon(chatbefore_image);
+		chat_button.setBorderPainted(false);
+		chat_button.setContentAreaFilled(false);
+		chat_button.setFocusPainted(false);
 		menu_panel.add(chat_button);
-		chat_button.addActionListener(this);
-
-		set_button = new JButton("New button");
-		set_button.setBounds(467, 259, 150, 150);
-		menu_panel.add(set_button);
-		set_button.addActionListener(this);
-
-		coin_button = new JButton("New button");
-		coin_button.setBounds(680, 259, 150, 150);
+		chat_button.addMouseListener(this);
+		
+		coin_button = new JButton();
+		coin_button.setBounds(457, 259, 160, 160);
+		coin_button.setIcon(coinbefore_image);
+		coin_button.setBorderPainted(false);
+		coin_button.setContentAreaFilled(false);
+		coin_button.setFocusPainted(false);
 		menu_panel.add(coin_button);
-		coin_button.addActionListener(this);
+		coin_button.addMouseListener(this);
+		
+		set_button = new JButton();
+		set_button.setBounds(641, 259, 160, 160);
+		set_button.setIcon(setbefore_image);
+		set_button.setBorderPainted(false);
+		set_button.setContentAreaFilled(false);
+		set_button.setFocusPainted(false);
+		menu_panel.add(set_button);
+		set_button.addMouseListener(this);
 
 		JLabel menubackground_label = new JLabel();
 		menubackground_label.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-		menubackground_label.setIcon(signupbackground_image);
+		menubackground_label.setIcon(menubackground_image);
 		menu_panel.add(menubackground_label);
 		
 		setVisible(true);
@@ -289,9 +314,6 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == chat_button) {//메뉴화면의 채팅버튼
-			ConferenceFrame cf = new ConferenceFrame();
-		}
 	}
 
 	@Override
@@ -319,6 +341,10 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 			login_id_tf.setText(null);
 		}else if(e.getSource() == login_pw_tf) {
 			login_pw_tf.setText(null);
+		}else if(e.getSource() == calendar_button) {
+			
+		}else if(e.getSource() == chat_button) {
+			ConferenceFrame cf = new ConferenceFrame();
 		}
 	}
 
@@ -334,6 +360,14 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 			login_button.setIcon(loginafter_image);
 		}else if(e.getSource() == signup_signup_button) {
 			signup_signup_button.setIcon(signupafter_image);
+		}else if(e.getSource() == calendar_button) {
+			calendar_button.setIcon(calendarafter_image);
+		}else if(e.getSource() == chat_button) {
+			chat_button.setIcon(chatafter_image);
+		}else if(e.getSource() == coin_button) {
+			coin_button.setIcon(coinafter_image);
+		}else if(e.getSource() == set_button) {
+			set_button.setIcon(setafter_image);
 		}
 	}
 
@@ -344,6 +378,14 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 			login_button.setIcon(loginbefore_image);
 		}else if(e.getSource() == signup_signup_button) {
 			signup_signup_button.setIcon(signupbefore_image);
+		}else if(e.getSource() == calendar_button) {
+			calendar_button.setIcon(calendarbefore_image);
+		}else if(e.getSource() == chat_button) {
+			chat_button.setIcon(chatbefore_image);
+		}else if(e.getSource() == coin_button) {
+			coin_button.setIcon(coinbefore_image);
+		}else if(e.getSource() == set_button) {
+			set_button.setIcon(setbefore_image);
 		}
 	}
 }

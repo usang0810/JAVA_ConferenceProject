@@ -1,14 +1,16 @@
-import java.awt.Color;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class MenuFrame extends JFrame{
 	
+	//public ImageIcon menubackground = new ImageCon();
+	
 	JPanel menu_panel;
+	
+	JButton calendar_button, chat_button, coin_button, set_button;
 	
 	public MenuFrame() {
 		setSize(Main.MAIN_WIDTH, Main.MAIN_HEIGHT);
@@ -23,23 +25,36 @@ public class MenuFrame extends JFrame{
 		getContentPane().setLayout(null);
 		menu_panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(467, 58, 150, 150);
-		menu_panel.add(btnNewButton);
+		calendar_button = new JButton();
+		calendar_button.setBounds(85, 259, 160, 160);
+		calendar_button.setBorderPainted(false);
+		calendar_button.setContentAreaFilled(false);
+		calendar_button.setFocusPainted(false);
+		menu_panel.add(calendar_button);
 		
-		JButton button = new JButton("New button");
-		button.setBounds(680, 58, 150, 150);
-		menu_panel.add(button);
+		chat_button = new JButton();
+		chat_button.setBounds(271, 259, 160, 160);
+		chat_button.setBorderPainted(false);
+		chat_button.setContentAreaFilled(false);
+		chat_button.setFocusPainted(false);
+		menu_panel.add(chat_button);
 		
-		JButton button_1 = new JButton("New button");
-		button_1.setBounds(467, 259, 150, 150);
-		menu_panel.add(button_1);
+		coin_button = new JButton();
+		coin_button.setBounds(457, 259, 160, 160);
+		coin_button.setBorderPainted(false);
+		coin_button.setContentAreaFilled(false);
+		coin_button.setFocusPainted(false);
+		menu_panel.add(coin_button);
 		
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(680, 259, 150, 150);
-		menu_panel.add(button_2);
+		set_button = new JButton();
+		set_button.setBounds(641, 259, 160, 160);
+		set_button.setBorderPainted(false);
+		set_button.setContentAreaFilled(false);
+		set_button.setFocusPainted(false);
+		menu_panel.add(set_button);
 		
 		JLabel menubackground_label = new JLabel();
+		menubackground_label.setIcon(new ImageIcon(MenuFrame.class.getResource("/images/menu_background.png")));
 		menubackground_label.setBounds(0, 0, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		menu_panel.add(menubackground_label);
 		

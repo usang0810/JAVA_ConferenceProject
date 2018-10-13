@@ -1,8 +1,8 @@
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +20,11 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 	private static final int CHAT_HEIGHT = 640;
 	private static final int CHAT_SCREEN_WIDTH = 844;
 	private static final int CHAT_SCREEN_HEIGHT = 601;
+	
+	public ImageIcon groupbackground_image = new ImageIcon(ConferenceFrame.class.getResource("/images/group_background.png"));
+	public ImageIcon grouplistbefore_image = new ImageIcon(ConferenceFrame.class.getResource("/images/grouplist_before.png"));
+	public ImageIcon grouplistafter_image = new ImageIcon(ConferenceFrame.class.getResource("/images/grouplist_after.png"));
+
 	
 	private JPanel selectgroup_panel, chat_panel;
 	private JButton group1_button, group2_button, group3_button, group4_button, group5_button,
@@ -43,32 +48,53 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 		selectgroup_panel.setLayout(null);
 		
 		group1_button = new JButton("1");
-		group1_button.setBounds(51, 168, 378, 42);
+		group1_button.setBounds(57, 168, 371, 43);
+		group1_button.setIcon(grouplistbefore_image);
+		group1_button.setBorderPainted(false);
+		group1_button.setContentAreaFilled(false);
+		group1_button.setFocusPainted(false);
 		selectgroup_panel.add(group1_button);
 		group1_button.addMouseListener(this);
 		
 		group2_button = new JButton("2");
-		group2_button.setBounds(51, 240, 378, 42);
+		group2_button.setBounds(57, 240, 371, 43);
+		group2_button.setIcon(grouplistbefore_image);
+		group2_button.setBorderPainted(false);
+		group2_button.setContentAreaFilled(false);
+		group2_button.setFocusPainted(false);
 		selectgroup_panel.add(group2_button);
 		group2_button.addMouseListener(this);
 		
 		group3_button = new JButton("3");
-		group3_button.setBounds(51, 314, 378, 42);
+		group3_button.setBounds(57, 314, 371, 43);
+		group3_button.setIcon(grouplistbefore_image);
+		group3_button.setBorderPainted(false);
+		group3_button.setContentAreaFilled(false);
+		group3_button.setFocusPainted(false);
 		selectgroup_panel.add(group3_button);
 		group3_button.addMouseListener(this);
 		
 		group4_button = new JButton("4");
-		group4_button.setBounds(51, 389, 378, 42);
+		group4_button.setBounds(57, 389, 371, 43);
+		group4_button.setIcon(grouplistbefore_image);
+		group4_button.setBorderPainted(false);
+		group4_button.setContentAreaFilled(false);
+		group4_button.setFocusPainted(false);
 		selectgroup_panel.add(group4_button);
 		group4_button.addMouseListener(this);
 		
 		group5_button = new JButton("5");
-		group5_button.setBounds(51, 464, 378, 42);
+		group5_button.setBounds(57, 464, 371, 43);
+		group5_button.setIcon(grouplistbefore_image);
+		group5_button.setBorderPainted(false);
+		group5_button.setContentAreaFilled(false);
+		group5_button.setFocusPainted(false);
 		selectgroup_panel.add(group5_button);
 		group5_button.addMouseListener(this);
 		
 		JLabel groupbackground_label = new JLabel();
 		groupbackground_label.setBounds(0, 0, GROUP_SCREEN_WIDTH, GROUP_SCREEN_HEIGHT);
+		groupbackground_label.setIcon(groupbackground_image);
 		selectgroup_panel.add(groupbackground_label);
 		
 		
@@ -141,12 +167,32 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == (group1_button)) {
+			group1_button.setIcon(grouplistafter_image);
+		}else if(e.getSource() == (group2_button)) {
+			group2_button.setIcon(grouplistafter_image);
+		}else if(e.getSource() == (group3_button)) {
+			group3_button.setIcon(grouplistafter_image);
+		}else if(e.getSource() == (group4_button)) {
+			group4_button.setIcon(grouplistafter_image);
+		}else if(e.getSource() == (group5_button)) {
+			group5_button.setIcon(grouplistafter_image);
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == (group1_button)) {
+			group1_button.setIcon(grouplistbefore_image);
+		}else if(e.getSource() == (group2_button)) {
+			group2_button.setIcon(grouplistbefore_image);
+		}else if(e.getSource() == (group3_button)) {
+			group3_button.setIcon(grouplistbefore_image);
+		}else if(e.getSource() == (group4_button)) {
+			group4_button.setIcon(grouplistbefore_image);
+		}else if(e.getSource() == (group5_button)) {
+			group5_button.setIcon(grouplistbefore_image);
+		}
 	}
 }
