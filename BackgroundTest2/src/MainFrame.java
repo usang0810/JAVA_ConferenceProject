@@ -1,10 +1,10 @@
+//로그인 패널, 회원가입 패널, 메뉴 패널, 회원정보 수정 패널
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,6 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -32,6 +33,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	private JButton login_button, login_signup_button, signup_signup_button, calendar_button, chat_button, set_button, coin_button;
 	private JTextField login_id_tf, signup_id_tf, nickname_tf, tel1_tf, tel2_tf;
 	private JPasswordField login_pw_tf, signup_pw_tf, pwck_tf;
+	private JOptionPane signupmessage;
 	
 	public MainFrame() {
 		setTitle("conferencesystem/login");
@@ -62,6 +64,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 		login_id_tf.setColumns(10);
 		login_id_tf.setOpaque(false);//배경 없음
 		login_id_tf.setBorder(null);//테두리 없음
+		login_id_tf.addMouseListener(this);
 		login_panel.add(login_id_tf);
 		
 		login_pw_tf = new JPasswordField("password");
@@ -70,6 +73,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 		login_pw_tf.setBounds(507, 186, 242, 38);
 		login_pw_tf.setOpaque(false);
 		login_pw_tf.setBorder(null);
+		login_pw_tf.addMouseListener(this);
 		login_panel.add(login_pw_tf);
 		
 		login_signup_button = new JButton();
@@ -285,7 +289,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == chat_button) {
+		if(e.getSource() == chat_button) {//메뉴화면의 채팅버튼
 			ConferenceFrame cf = new ConferenceFrame();
 		}
 	}
@@ -298,18 +302,23 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == login_button) {
+		if(e.getSource() == login_button) {//로그인 화면의 로그인 버튼
 			login_panel.setVisible(false);
 			setTitle("conferencesystem/menu");
 			menu_panel.setVisible(true);
-		}else if(e.getSource() == login_signup_button) {
+		}else if(e.getSource() == login_signup_button) {//로그인 화면의 회원가입 버튼
 			login_panel.setVisible(false);
 			setTitle("conferencesystem/signup");
 			signup_panel.setVisible(true);
-		}else if(e.getSource() == signup_signup_button) {
+		}else if(e.getSource() == signup_signup_button) {//회원가입화면의 회원가입 버튼
 			signup_panel.setVisible(false);
 			setTitle("conferencesystem/login");
 			login_panel.setVisible(true);
+			signupmessage.showMessageDialog(null, "Welcome to Conference System");
+		}else if(e.getSource() == login_id_tf) {
+			login_id_tf.setText(null);
+		}else if(e.getSource() == login_pw_tf) {
+			login_pw_tf.setText(null);
 		}
 	}
 
