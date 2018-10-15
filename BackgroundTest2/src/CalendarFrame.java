@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,9 @@ import javax.swing.JComboBox;
 import java.awt.GridLayout;
 
 public class CalendarFrame extends JFrame implements ActionListener{
+	//image icon
+	public ImageIcon calendarbackground_image= new ImageIcon(CalendarFrame.class.getResource("/images/calendar_background.jpg"));
+
 	private static final int CALENDAR_WIDTH = 780;
 	private static final int CALENDAR_HEIGHT = 580;
 	private static final int CALENDAR_SCREEN_WIDTH = 764;
@@ -28,13 +32,13 @@ public class CalendarFrame extends JFrame implements ActionListener{
 	public JPanel main_panel, calendar_panel, memo_panel;
 	public JPanel top_panel = new JPanel();
 	public JPanel center_panel = new JPanel(new BorderLayout());
-	public JPanel title_panel = new JPanel(new GridLayout(1, 7));
-	public JPanel data_panel = new JPanel(new GridLayout(0, 7));
+	public JPanel title_panel = new JPanel(new GridLayout(1, 7));//요일 출력 할 패널 - 7칸
+	public JPanel data_panel = new JPanel(new GridLayout(0, 7));//날짜 출력 할 패널 - 7칸
 	private JButton left_button = new JButton("◀");
 	private JLabel year_label = new JLabel("년");
 	private JLabel month_label = new JLabel("월");
 	private JButton right_button = new JButton("▶");
-	private JButton day_button[] = new JButton[31];
+	private JButton day_button[] = new JButton[31];//최대 31일
 	
 	private JButton save_button, clear_button;
 	JComboBox<Integer> year_combobox = new JComboBox<Integer>();
@@ -45,9 +49,6 @@ public class CalendarFrame extends JFrame implements ActionListener{
 	String titleStr[] = { "일", "월", "화", "수", "목", "금", "토" };
 	Calendar now;
 	int year, month, date;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JPanel panel_2;
 	private final JPanel memotitle_panel = new JPanel();
 	private final JLabel memotitle_label = new JLabel("*MEMO*");
 	private JTextArea memo_textarea;
@@ -57,7 +58,6 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 자원 해제 후 종료
 		setSize(CALENDAR_WIDTH, CALENDAR_HEIGHT);
 		main_panel = new JPanel();
-		main_panel.setBackground(Color.LIGHT_GRAY);
 		main_panel.setBounds(0, 0, CALENDAR_SCREEN_WIDTH, CALENDAR_SCREEN_HEIGHT);
 		getContentPane().add(main_panel);
 		main_panel.setLayout(null);
@@ -67,9 +67,6 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		calendar_panel.setBounds(25, 146, 441, 370);
 		main_panel.add(calendar_panel);
 		calendar_panel.setLayout(new BorderLayout(0, 0));
-		
-		//calendar_panel.add(top_panel, BorderLayout.NORTH);
-		//calendar_panel.add(center_panel, BorderLayout.CENTER);
 		
 		left_button.setBackground(Color.WHITE);
 		right_button.setBackground(Color.WHITE);
@@ -104,11 +101,11 @@ public class CalendarFrame extends JFrame implements ActionListener{
 
 		// Center
 		title_panel.setBackground(Color.white);
-		for (int i = 0; i < titleStr.length; i++) {
+		for (int i = 0; i < titleStr.length; i++) {//요일의 길이만큼 반복(7)해서 라벨생성
 			JLabel lbl = new JLabel(titleStr[i], JLabel.CENTER);
-			if (i == 0) {
+			if (i == 0) {//일요일 red
 				lbl.setForeground(Color.red);
-			} else if (i == 6) {
+			} else if (i == 6) {//토요일 blue
 				lbl.setForeground(Color.blue);
 			}
 			title_panel.add(lbl);
@@ -159,10 +156,10 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		memo_textarea.setBounds(10, 47, 208, 280);
 		memo_panel.add(memo_textarea);
 		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(0, 0, CALENDAR_SCREEN_WIDTH, CALENDAR_SCREEN_HEIGHT);
-		main_panel.add(lblNewLabel);
+		JLabel background_label = new JLabel();
+		background_label.setBounds(0, 0, CALENDAR_SCREEN_WIDTH, CALENDAR_SCREEN_HEIGHT);
+		background_label.setIcon(calendarbackground_image);
+		main_panel.add(background_label);
 		
 		setVisible(true);
 		
@@ -189,7 +186,7 @@ public class CalendarFrame extends JFrame implements ActionListener{
 					// TODO Auto-generated method stub
 					
 					if(e.getSource() == day_button[10]) {
-						JOptionPane.showMessageDialog(null, "hello world!");
+						//JOptionPane.showMessageDialog(null, "hello world!");//messagedialog test
 					}
 				}
 				

@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class MainFrame extends JFrame implements ActionListener, MouseListener{
-	
+public class MainFrame extends JFrame implements MouseListener{
+	//image icon
 	public ImageIcon loginbackground_image= new ImageIcon(MainFrame.class.getResource("/images/login_background.png"));
 	public ImageIcon loginbefore_image= new ImageIcon(MainFrame.class.getResource("/images/login_before.png"));
 	public ImageIcon loginafter_image= new ImageIcon(MainFrame.class.getResource("/images/login_after.png"));
@@ -37,18 +37,18 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	public ImageIcon coinafter_image = new ImageIcon(MainFrame.class.getResource("/images/coin_after.png"));
 	public ImageIcon setbefore_image = new ImageIcon(MainFrame.class.getResource("/images/set_before.png"));
 	public ImageIcon setafter_image = new ImageIcon(MainFrame.class.getResource("/images/set_after.png"));
-	
+	//
 	public JPanel login_panel, signup_panel, menu_panel;
 	private JButton login_button, login_signup_button, signup_signup_button, calendar_button, chat_button, set_button, coin_button;
 	private JTextField login_id_tf, signup_id_tf, nickname_tf, tel1_tf, tel2_tf;
 	private JPasswordField login_pw_tf, signup_pw_tf, pwck_tf;
 	private JOptionPane signupmessage;
 	
-	public MainFrame() {
+	public MainFrame() {//시작은 로그인 패널
 		setTitle("conferencesystem/login");
 		setSize(Main.MAIN_WIDTH, Main.MAIN_HEIGHT);
-		setResizable(false);
-		setLocationRelativeTo(null);
+		setResizable(false);//창크기조절 불가
+		setLocationRelativeTo(null);//화면중앙에 생성
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//로그인 패널 생성
@@ -312,11 +312,6 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 	}
@@ -336,18 +331,18 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 			signup_panel.setVisible(false);
 			setTitle("conferencesystem/login");
 			login_panel.setVisible(true);
-			signupmessage.showMessageDialog(null, "Welcome to Conference System");
-		}else if(e.getSource() == login_id_tf) {
+			signupmessage.showMessageDialog(null, "Welcome to Conference System");//다이얼로그 생성
+		}else if(e.getSource() == login_id_tf) {//id_tf 클릭시 초기화
 			login_id_tf.setText(null);
-		}else if(e.getSource() == login_pw_tf) {
+		}else if(e.getSource() == login_pw_tf) {//pw_tf 클릭시 초기화
 			login_pw_tf.setText(null);
-		}else if(e.getSource() == calendar_button) {
+		}else if(e.getSource() == calendar_button) {//calendarfrmae 생성
 			CalendarFrame calendarframe = new CalendarFrame();
-		}else if(e.getSource() == chat_button) {
+		}else if(e.getSource() == chat_button) {//conferenceframe 생성
 			ConferenceFrame conferenceframe = new ConferenceFrame();
-		}else if(e.getSource() == coin_button) {
+		}else if(e.getSource() == coin_button) {//coinframe 생성
 			CoinFrame coinframe = new CoinFrame();
-		}else if(e.getSource() == set_button) {
+		}else if(e.getSource() == set_button) {//setframe 생성
 			SetFrame setframe = new SetFrame();
 		}
 	}
@@ -358,7 +353,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(MouseEvent e) {//버튼위에 마우스 들어올 시 이미지 변환
 		// TODO Auto-generated method stub
 		if(e.getSource() == login_button) {
 			login_button.setIcon(loginafter_image);
@@ -376,7 +371,7 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent e) {//버튼에서 마우스 나갈 시 이미지 변환
 		// TODO Auto-generated method stub
 		if(e.getSource() == login_button) {
 			login_button.setIcon(loginbefore_image);

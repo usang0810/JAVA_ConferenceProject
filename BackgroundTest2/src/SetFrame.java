@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -10,14 +12,17 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class SetFrame extends JFrame{
-	
-	public ImageIcon signupbackground_image = new ImageIcon(MainFrame.class.getResource("/images/signup_background.png"));
+	//image icon
+	public ImageIcon setbackground_image = new ImageIcon(MainFrame.class.getResource("/images/set_background.jpg"));
+	public ImageIcon completebefore_image = new ImageIcon(SetFrame.class.getResource("/images/complete_before.jpg"));
+	public ImageIcon completeafter_image = new ImageIcon(SetFrame.class.getResource("/images/complete_after.jpg"));
 	
 	private JPanel main_panel;
 	private JButton set_button;
@@ -32,7 +37,7 @@ public class SetFrame extends JFrame{
 		getContentPane().setLayout(null);
 		
 		main_panel = new JPanel();
-		main_panel.setBounds(0,0,894,501);
+		main_panel.setBounds(0,0,Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
 		getContentPane().add(main_panel);
 		main_panel.setLayout(null);
 		
@@ -43,10 +48,22 @@ public class SetFrame extends JFrame{
 		
 		set_button = new JButton("Complete");
 		set_button.setBounds(298, 382, 287, 55);
-		//set_button.setBorderPainted(false);
-		//set_button.setContentAreaFilled(false);
-		//set_button.setFocusPainted(false);
-		//set_button.addMouseListener(this);
+		set_button.setIcon(completebefore_image);
+		set_button.setBorderPainted(false);
+		set_button.setContentAreaFilled(false);
+		set_button.setFocusPainted(false);
+		set_button.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				setVisible(false);
+				JOptionPane.showMessageDialog(null, "¼öÁ¤ ¿Ï·á!");//messagedialog
+			}
+			public void mouseEntered(MouseEvent e) {
+				set_button.setIcon(completeafter_image);
+			}
+			public void mouseExited(MouseEvent e) {
+				set_button.setIcon(completebefore_image);
+			}
+		});
 		main_panel.add(set_button);
 		
 		pw_tf = new JPasswordField();
@@ -139,52 +156,38 @@ public class SetFrame extends JFrame{
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("ADD GROUP");
-		lblNewLabel_1.setForeground(Color.YELLOW);
-		lblNewLabel_1.setFont(new Font("±¼¸²", Font.BOLD, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(497, 159, 141, 20);
-		main_panel.add(lblNewLabel_1);
-		
-		JLabel lblDeleteGroup = new JLabel("DELETE GROUP");
-		lblDeleteGroup.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDeleteGroup.setForeground(Color.ORANGE);
-		lblDeleteGroup.setFont(new Font("±¼¸²", Font.BOLD, 15));
-		lblDeleteGroup.setBounds(688, 159, 149, 20);
-		main_panel.add(lblDeleteGroup);
-		
 		JCheckBox basicproject_checkbox = new JCheckBox("Basic Project");
 		basicproject_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
 		basicproject_checkbox.setForeground(Color.WHITE);
-		basicproject_checkbox.setBounds(497, 186, 127, 23);
+		basicproject_checkbox.setBounds(471, 186, 127, 23);
 		basicproject_checkbox.setOpaque(false);
 		main_panel.add(basicproject_checkbox);
 		
 		JCheckBox expertproject_checkbox = new JCheckBox("Expert Project");
 		expertproject_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
 		expertproject_checkbox.setForeground(Color.WHITE);
-		expertproject_checkbox.setBounds(497, 216, 141, 23);
+		expertproject_checkbox.setBounds(471, 216, 141, 23);
 		expertproject_checkbox.setOpaque(false);
 		main_panel.add(expertproject_checkbox);
 		
 		JCheckBox lolgroup_checkbox = new JCheckBox("LOL GROUP");
 		lolgroup_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
 		lolgroup_checkbox.setForeground(Color.WHITE);
-		lolgroup_checkbox.setBounds(497, 246, 115, 23);
+		lolgroup_checkbox.setBounds(471, 246, 115, 23);
 		lolgroup_checkbox.setOpaque(false);
 		main_panel.add(lolgroup_checkbox);
 		
 		JCheckBox battlegroundgroup_checkbox = new JCheckBox("Battleground GROUP");
 		battlegroundgroup_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
 		battlegroundgroup_checkbox.setForeground(Color.WHITE);
-		battlegroundgroup_checkbox.setBounds(497, 276, 176, 23);
+		battlegroundgroup_checkbox.setBounds(471, 276, 176, 23);
 		battlegroundgroup_checkbox.setOpaque(false);
 		main_panel.add(battlegroundgroup_checkbox);
 		
 		JCheckBox etc_checkbox = new JCheckBox("ETC");
 		etc_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
 		etc_checkbox.setForeground(Color.WHITE);
-		etc_checkbox.setBounds(497, 306, 141, 23);
+		etc_checkbox.setBounds(471, 306, 141, 23);
 		etc_checkbox.setOpaque(false);
 		main_panel.add(etc_checkbox);
 		
@@ -192,41 +195,41 @@ public class SetFrame extends JFrame{
 		checkBox.setOpaque(false);
 		checkBox.setForeground(Color.WHITE);
 		checkBox.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		checkBox.setBounds(685, 186, 127, 23);
+		checkBox.setBounds(645, 186, 127, 23);
 		main_panel.add(checkBox);
 		
 		JCheckBox checkBox_1 = new JCheckBox("Expert Project");
 		checkBox_1.setOpaque(false);
 		checkBox_1.setForeground(Color.WHITE);
 		checkBox_1.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		checkBox_1.setBounds(685, 216, 141, 23);
+		checkBox_1.setBounds(645, 216, 141, 23);
 		main_panel.add(checkBox_1);
 		
 		JCheckBox checkBox_2 = new JCheckBox("LOL GROUP");
 		checkBox_2.setOpaque(false);
 		checkBox_2.setForeground(Color.WHITE);
 		checkBox_2.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		checkBox_2.setBounds(685, 246, 115, 23);
+		checkBox_2.setBounds(645, 246, 115, 23);
 		main_panel.add(checkBox_2);
 		
 		JCheckBox checkBox_3 = new JCheckBox("Battleground GROUP");
 		checkBox_3.setOpaque(false);
 		checkBox_3.setForeground(Color.WHITE);
 		checkBox_3.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		checkBox_3.setBounds(685, 276, 176, 23);
+		checkBox_3.setBounds(645, 276, 176, 23);
 		main_panel.add(checkBox_3);
 		
 		JCheckBox checkBox_4 = new JCheckBox("ETC");
 		checkBox_4.setOpaque(false);
 		checkBox_4.setForeground(Color.WHITE);
 		checkBox_4.setFont(new Font("±¼¸²", Font.BOLD, 12));
-		checkBox_4.setBounds(685, 306, 141, 23);
+		checkBox_4.setBounds(645, 306, 141, 23);
 		main_panel.add(checkBox_4);
 		
-		JLabel signupbackground_label = new JLabel();
-		signupbackground_label.setBounds(0, 0, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
-		signupbackground_label.setIcon(signupbackground_image);
-		main_panel.add(signupbackground_label);
+		JLabel setbackground_label = new JLabel();
+		setbackground_label.setBounds(0, 0, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+		setbackground_label.setIcon(setbackground_image);
+		main_panel.add(setbackground_label);
 		
 		setVisible(true);
 	}
