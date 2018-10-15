@@ -1,0 +1,233 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+public class SetFrame extends JFrame{
+	
+	public ImageIcon signupbackground_image = new ImageIcon(MainFrame.class.getResource("/images/signup_background.png"));
+	
+	private JPanel main_panel;
+	private JButton set_button;
+	private JTextField nickname_tf, tel1_tf, tel2_tf;
+	private JPasswordField pw_tf, pwck_tf; 
+	
+	public SetFrame() {
+		setTitle("conferencesystem/set");
+		setSize(Main.MAIN_WIDTH, Main.MAIN_HEIGHT);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+		
+		main_panel = new JPanel();
+		main_panel.setBounds(0,0,894,501);
+		getContentPane().add(main_panel);
+		main_panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("jo you sang");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(230, 186, 188, 20);
+		main_panel.add(lblNewLabel);
+		
+		set_button = new JButton("Complete");
+		set_button.setBounds(298, 382, 287, 55);
+		//set_button.setBorderPainted(false);
+		//set_button.setContentAreaFilled(false);
+		//set_button.setFocusPainted(false);
+		//set_button.addMouseListener(this);
+		main_panel.add(set_button);
+		
+		pw_tf = new JPasswordField();
+		pw_tf.setBounds(230, 212, 188, 20);
+		pw_tf.setBorder(null);
+		main_panel.add(pw_tf);
+		pw_tf.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if(((JTextField)ke.getSource()).getText().length()>=15) {//±ÛÀÚ¼ö ÃÖ´ë 15ÀÚ
+					ke.consume();
+				}
+			}
+		});
+		
+		pwck_tf = new JPasswordField();
+		pwck_tf.setBounds(230, 238, 188, 20);
+		pwck_tf.setBorder(null);
+		main_panel.add(pwck_tf);
+		pwck_tf.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if(((JTextField)ke.getSource()).getText().length()>=15) {//±ÛÀÚ¼ö ÃÖ´ë 15ÀÚ
+					ke.consume();
+				}
+			}
+		});
+		
+		nickname_tf = new JTextField();
+		nickname_tf.setColumns(10);
+		nickname_tf.setBounds(230, 264, 188, 20);
+		nickname_tf.setBorder(null);
+		main_panel.add(nickname_tf);
+		nickname_tf.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				if(((JTextField)ke.getSource()).getText().length()>=12) {//±ÛÀÚ¼ö ÃÖ´ë 12ÀÚ
+					ke.consume();
+				}
+			}
+		});
+		
+		JComboBox tel_combobox = new JComboBox();
+		tel_combobox.setFont(new Font("±¼¸²", Font.PLAIN, 10));
+		tel_combobox.setModel(new DefaultComboBoxModel(new String[] {"010", "019", "011"}));
+		tel_combobox.setMaximumRowCount(3);
+		tel_combobox.setBounds(230, 291, 43, 20);
+		main_panel.add(tel_combobox);
+		
+		JLabel tel1_label = new JLabel("-");
+		tel1_label.setForeground(Color.WHITE);
+		tel1_label.setBounds(285, 293, 13, 15);
+		main_panel.add(tel1_label);
+		
+		tel1_tf = new JTextField();
+		tel1_tf.setBounds(305, 291, 40, 21);
+		tel1_tf.setBorder(null);
+		main_panel.add(tel1_tf);
+		tel1_tf.setColumns(4);
+		tel1_tf.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				
+				if(!Character.isDigit(c)) {//¹®ÀÚ ÀÔ·Â ½Ã ÄÁ½·
+					ke.consume();
+				}
+				if(((JTextField)ke.getSource()).getText().length()>=4) {//±ÛÀÚ¼ö ÃÖ´ë 4ÀÚ
+					ke.consume();
+				}
+			}
+		});
+		
+		JLabel tel2_label = new JLabel("-");
+		tel2_label.setForeground(Color.WHITE);
+		tel2_label.setBounds(358, 293, 13, 15);
+		main_panel.add(tel2_label);
+		
+		tel2_tf = new JTextField();
+		tel2_tf.setColumns(4);
+		tel2_tf.setBounds(378, 291, 40, 21);
+		tel2_tf.setBorder(null);
+		main_panel.add(tel2_tf);
+		tel2_tf.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent ke) {
+				char c = ke.getKeyChar();
+				
+				if(!Character.isDigit(c)) {//¹®ÀÚ ÀÔ·Â ½Ã ÄÁ½·
+					ke.consume();
+				}
+				if(((JTextField)ke.getSource()).getText().length()>=4) {//±ÛÀÚ¼ö ÃÖ´ë 4ÀÚ
+					ke.consume();
+				}
+			}
+		});
+		
+		JLabel lblNewLabel_1 = new JLabel("ADD GROUP");
+		lblNewLabel_1.setForeground(Color.YELLOW);
+		lblNewLabel_1.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(497, 159, 141, 20);
+		main_panel.add(lblNewLabel_1);
+		
+		JLabel lblDeleteGroup = new JLabel("DELETE GROUP");
+		lblDeleteGroup.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDeleteGroup.setForeground(Color.ORANGE);
+		lblDeleteGroup.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lblDeleteGroup.setBounds(688, 159, 149, 20);
+		main_panel.add(lblDeleteGroup);
+		
+		JCheckBox basicproject_checkbox = new JCheckBox("Basic Project");
+		basicproject_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		basicproject_checkbox.setForeground(Color.WHITE);
+		basicproject_checkbox.setBounds(497, 186, 127, 23);
+		basicproject_checkbox.setOpaque(false);
+		main_panel.add(basicproject_checkbox);
+		
+		JCheckBox expertproject_checkbox = new JCheckBox("Expert Project");
+		expertproject_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		expertproject_checkbox.setForeground(Color.WHITE);
+		expertproject_checkbox.setBounds(497, 216, 141, 23);
+		expertproject_checkbox.setOpaque(false);
+		main_panel.add(expertproject_checkbox);
+		
+		JCheckBox lolgroup_checkbox = new JCheckBox("LOL GROUP");
+		lolgroup_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		lolgroup_checkbox.setForeground(Color.WHITE);
+		lolgroup_checkbox.setBounds(497, 246, 115, 23);
+		lolgroup_checkbox.setOpaque(false);
+		main_panel.add(lolgroup_checkbox);
+		
+		JCheckBox battlegroundgroup_checkbox = new JCheckBox("Battleground GROUP");
+		battlegroundgroup_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		battlegroundgroup_checkbox.setForeground(Color.WHITE);
+		battlegroundgroup_checkbox.setBounds(497, 276, 176, 23);
+		battlegroundgroup_checkbox.setOpaque(false);
+		main_panel.add(battlegroundgroup_checkbox);
+		
+		JCheckBox etc_checkbox = new JCheckBox("ETC");
+		etc_checkbox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		etc_checkbox.setForeground(Color.WHITE);
+		etc_checkbox.setBounds(497, 306, 141, 23);
+		etc_checkbox.setOpaque(false);
+		main_panel.add(etc_checkbox);
+		
+		JCheckBox checkBox = new JCheckBox("Basic Project");
+		checkBox.setOpaque(false);
+		checkBox.setForeground(Color.WHITE);
+		checkBox.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		checkBox.setBounds(685, 186, 127, 23);
+		main_panel.add(checkBox);
+		
+		JCheckBox checkBox_1 = new JCheckBox("Expert Project");
+		checkBox_1.setOpaque(false);
+		checkBox_1.setForeground(Color.WHITE);
+		checkBox_1.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		checkBox_1.setBounds(685, 216, 141, 23);
+		main_panel.add(checkBox_1);
+		
+		JCheckBox checkBox_2 = new JCheckBox("LOL GROUP");
+		checkBox_2.setOpaque(false);
+		checkBox_2.setForeground(Color.WHITE);
+		checkBox_2.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		checkBox_2.setBounds(685, 246, 115, 23);
+		main_panel.add(checkBox_2);
+		
+		JCheckBox checkBox_3 = new JCheckBox("Battleground GROUP");
+		checkBox_3.setOpaque(false);
+		checkBox_3.setForeground(Color.WHITE);
+		checkBox_3.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		checkBox_3.setBounds(685, 276, 176, 23);
+		main_panel.add(checkBox_3);
+		
+		JCheckBox checkBox_4 = new JCheckBox("ETC");
+		checkBox_4.setOpaque(false);
+		checkBox_4.setForeground(Color.WHITE);
+		checkBox_4.setFont(new Font("±¼¸²", Font.BOLD, 12));
+		checkBox_4.setBounds(685, 306, 141, 23);
+		main_panel.add(checkBox_4);
+		
+		JLabel signupbackground_label = new JLabel();
+		signupbackground_label.setBounds(0, 0, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+		signupbackground_label.setIcon(signupbackground_image);
+		main_panel.add(signupbackground_label);
+		
+		setVisible(true);
+	}
+}

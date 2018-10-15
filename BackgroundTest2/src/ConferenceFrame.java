@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,11 +14,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-public class ConferenceFrame extends JFrame implements MouseListener{
+public class ConferenceFrame extends JFrame implements MouseListener, ActionListener{
+	//그룹선택창 사이즈
 	private static final int GROUP_WIDTH = 500;
 	private static final int GROUP_HEIGHT = 600;
 	private static final int GROUP_SCREEN_WIDTH = 484;
 	private static final int GROUP_SCREEN_HEIGHT = 561;
+	//채팅창 사이즈
 	private static final int CHAT_WIDTH = 860;
 	private static final int CHAT_HEIGHT = 640;
 	private static final int CHAT_SCREEN_WIDTH = 844;
@@ -117,19 +122,27 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 		
 		send_button = new JButton("send");
 		send_button.setBounds(553, 522, 85, 23);
+		send_button.setBackground(new Color(100,200,200));
+		send_button.addActionListener(this);
 		chat_panel.add(send_button);
 		
 		file_button = new JButton("\uD30C\uC77C\uCCA8\uBD80");
 		file_button.setFont(new Font("굴림", Font.PLAIN, 10));
 		file_button.setBounds(651, 521, 85, 23);
+		file_button.setBackground(new Color(100,200,200));
+		file_button.addActionListener(this);
 		chat_panel.add(file_button);
 		
 		grouplist_button = new JButton("GROUP LIST");
 		grouplist_button.setBounds(95, 493, 135, 50);
+		grouplist_button.setBackground(new Color(100,200,200));
+		grouplist_button.addActionListener(this);
 		chat_panel.add(grouplist_button);
 		
 		sms_button = new JButton("SMS service");
 		sms_button.setBounds(95, 433, 135, 50);
+		sms_button.setBackground(new Color(100,200,200));
+		sms_button.addActionListener(this);
 		chat_panel.add(sms_button);
 		
 		userlist_textpane = new JTextPane();
@@ -153,7 +166,7 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		selectgroup_panel.setVisible(false);
-		setTitle("conferencesystem/chatt");
+		setTitle("conferencesystem/chat");
 		setSize(CHAT_WIDTH, CHAT_HEIGHT);
 		chat_panel.setVisible(true);
 	}
@@ -193,6 +206,19 @@ public class ConferenceFrame extends JFrame implements MouseListener{
 			group4_button.setIcon(grouplistbefore_image);
 		}else if(e.getSource() == (group5_button)) {
 			group5_button.setIcon(grouplistbefore_image);
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == sms_button) {
+			SMSFrame smsfrmae = new SMSFrame();
+		}else if(e.getSource() == grouplist_button) {
+			chat_panel.setVisible(false);
+			setTitle("conferencesystem/chat");
+			setSize(GROUP_WIDTH, GROUP_HEIGHT);
+			selectgroup_panel.setVisible(true);
 		}
 	}
 }

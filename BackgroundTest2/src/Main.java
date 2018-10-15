@@ -12,7 +12,5 @@ public class Main {
 		//ConferenceFrame cf = new ConferenceFrame();
 		//Test test = new Test();
 		//CalendarFrameTest cftest = new CalendarFrameTest();
-		
 	}
-
 }

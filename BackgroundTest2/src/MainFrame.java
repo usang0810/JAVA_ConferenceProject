@@ -342,9 +342,13 @@ public class MainFrame extends JFrame implements ActionListener, MouseListener{
 		}else if(e.getSource() == login_pw_tf) {
 			login_pw_tf.setText(null);
 		}else if(e.getSource() == calendar_button) {
-			
+			CalendarFrame calendarframe = new CalendarFrame();
 		}else if(e.getSource() == chat_button) {
-			ConferenceFrame cf = new ConferenceFrame();
+			ConferenceFrame conferenceframe = new ConferenceFrame();
+		}else if(e.getSource() == coin_button) {
+			CoinFrame coinframe = new CoinFrame();
+		}else if(e.getSource() == set_button) {
+			SetFrame setframe = new SetFrame();
 		}
 	}
 
