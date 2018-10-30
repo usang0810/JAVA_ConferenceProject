@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class CoinFrame extends JFrame implements ActionListener{
+	DBConnection connection = new DBConnection();
 	//image icon
 	public ImageIcon coinbackground_image= new ImageIcon(CoinFrame.class.getResource("/images/coin_background.jpg"));
 
@@ -26,6 +27,7 @@ public class CoinFrame extends JFrame implements ActionListener{
 	private JPanel main_panel, before_panel, after_panel;
 	private JTextField chargecoin_tf;
 	private JButton charge_button;
+	private JLabel nickname_label, servername_label, servernum_label, posses_label, beforecoin_label, charge_label;
 	
 	public CoinFrame() {
 		setTitle("conferencesystem/Coin");
@@ -40,18 +42,18 @@ public class CoinFrame extends JFrame implements ActionListener{
 		getContentPane().add(main_panel);
 		main_panel.setLayout(null);
 		
-		JLabel nickname_label = new JLabel("\uC870\uC720\uC0C1\uB2D8");//text = 조유상님
+		nickname_label = new JLabel(MainFrame.login_nickname+"님");//로그인한 id의 nickname
 		nickname_label.setForeground(Color.WHITE);
 		nickname_label.setFont(new Font("굴림", Font.BOLD, 15));
-		nickname_label.setBounds(12, 97, 85, 38);
+		nickname_label.setBounds(12, 97, 200, 38);
 		main_panel.add(nickname_label);
 		
-		JLabel servername_label = new JLabel("\uC608\uAE08\uC8FC : \uD64D\uAE38\uB3D9");//text = 예금주 : 홍길동
+		servername_label = new JLabel("\uC608\uAE08\uC8FC : \uD64D\uAE38\uB3D9");//text = 예금주 : 홍길동
 		servername_label.setForeground(Color.WHITE);
 		servername_label.setBounds(12, 225, 110, 15);
 		main_panel.add(servername_label);
 		
-		JLabel servernum_label = new JLabel("\uB18D\uD611 352-0123-4567-89");//text = 농협
+		servernum_label = new JLabel("\uB18D\uD611 352-0123-4567-89");//text = 농협
 		servernum_label.setForeground(Color.WHITE);
 		servernum_label.setBounds(12, 246, 165, 15);
 		main_panel.add(servernum_label);
@@ -62,12 +64,12 @@ public class CoinFrame extends JFrame implements ActionListener{
 		main_panel.add(before_panel);
 		before_panel.setLayout(null);
 		
-		JLabel posses_label = new JLabel("\uBCF4\uC720\r\n\uCF54\uC778");//text = 보유코인
+		posses_label = new JLabel("\uBCF4\uC720\r\n\uCF54\uC778");//text = 보유코인
 		posses_label.setHorizontalAlignment(SwingConstants.CENTER);
 		posses_label.setBounds(0, 0, 62, 70);
 		before_panel.add(posses_label);
 		
-		JLabel beforecoin_label = new JLabel("500");
+		beforecoin_label = new JLabel(Integer.toString(MainFrame.login_coin));//int형 coin을 string으로 변환
 		beforecoin_label.setHorizontalAlignment(SwingConstants.CENTER);
 		beforecoin_label.setBounds(62, 0, 103, 70);
 		before_panel.add(beforecoin_label);
@@ -78,7 +80,7 @@ public class CoinFrame extends JFrame implements ActionListener{
 		after_panel.setBounds(217, 145, 165, 70);
 		main_panel.add(after_panel);
 		
-		JLabel charge_label = new JLabel("\uCDA9\uC804\uCF54\uC778");//text = 충전코인
+		charge_label = new JLabel("\uCDA9\uC804\uCF54\uC778");//text = 충전코인
 		charge_label.setHorizontalAlignment(SwingConstants.CENTER);
 		charge_label.setBounds(0, 0, 62, 70);
 		after_panel.add(charge_label);
@@ -120,8 +122,11 @@ public class CoinFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == charge_button) {//charge_button 클릭 시
+			if(connection.updateApplyCoin(MainFrame.login_id, Integer.parseInt(chargecoin_tf.getText()))==false){
+				return;
+			}
 			setVisible(false);
-			JOptionPane.showMessageDialog(null, "입금 확인 후 충전됩니다!");//messagedialog
+			JOptionPane.showMessageDialog(null, chargecoin_tf.getText()+"원 입금 확인 후 충전됩니다!");//messagedialog
 		}
 	}
 }

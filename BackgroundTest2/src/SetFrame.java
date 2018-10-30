@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class SetFrame extends JFrame{
+	DBConnection connection = new DBConnection();
 	//image icon
 	public ImageIcon setbackground_image = new ImageIcon(MainFrame.class.getResource("/images/set_background.jpg"));
 	public ImageIcon completebefore_image = new ImageIcon(SetFrame.class.getResource("/images/complete_before.jpg"));
@@ -41,10 +42,10 @@ public class SetFrame extends JFrame{
 		getContentPane().add(main_panel);
 		main_panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("jo you sang");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(230, 186, 188, 20);
-		main_panel.add(lblNewLabel);
+		JLabel id_label = new JLabel(MainFrame.login_id);//ID label MainFrame의 login_id값을 가져옴
+		id_label.setForeground(Color.WHITE);
+		id_label.setBounds(230, 186, 188, 20);
+		main_panel.add(id_label);
 		
 		set_button = new JButton("Complete");
 		set_button.setBounds(298, 382, 287, 55);

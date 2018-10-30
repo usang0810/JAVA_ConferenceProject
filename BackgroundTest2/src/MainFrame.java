@@ -21,6 +21,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class MainFrame extends JFrame implements MouseListener{
+	//DB 객체 생성
+	DBConnection connection = new DBConnection();
 	//image icon
 	public ImageIcon loginbackground_image= new ImageIcon(MainFrame.class.getResource("/images/login_background.png"));
 	public ImageIcon loginbefore_image= new ImageIcon(MainFrame.class.getResource("/images/login_before.png"));
@@ -40,9 +42,14 @@ public class MainFrame extends JFrame implements MouseListener{
 	//
 	public JPanel login_panel, signup_panel, menu_panel;
 	private JButton login_button, login_signup_button, signup_signup_button, calendar_button, chat_button, set_button, coin_button;
-	private JTextField login_id_tf, signup_id_tf, nickname_tf, tel1_tf, tel2_tf;
-	private JPasswordField login_pw_tf, signup_pw_tf, pwck_tf;
+	private JTextField login_id_tf, signup_id_tf, nickname_tf, tel1_tf, tel2_tf, login_pw_tf, signup_pw_tf, pwck_tf;
 	private JOptionPane signupmessage;
+	private JComboBox tel_combobox;
+	private JCheckBox basicproject_checkbox, expertproject_checkbox, lolgroup_checkbox, battlegroundgroup_checkbox, etc_checkbox;
+	//로그인 성공시 전역으로 사용할 변수들
+	public static String login_id;
+	public static String login_nickname;
+	public static int login_coin;
 	
 	public MainFrame() {//시작은 로그인 패널
 		setTitle("conferencesystem/login");
@@ -164,7 +171,7 @@ public class MainFrame extends JFrame implements MouseListener{
 			}
 		});
 		
-		JComboBox tel_combobox = new JComboBox();
+		tel_combobox = new JComboBox();
 		tel_combobox.setFont(new Font("굴림", Font.PLAIN, 10));
 		tel_combobox.setModel(new DefaultComboBoxModel(new String[] {"010", "019", "011"}));
 		tel_combobox.setMaximumRowCount(3);
@@ -217,35 +224,35 @@ public class MainFrame extends JFrame implements MouseListener{
 			}
 		});
 		
-		JCheckBox basicproject_checkbox = new JCheckBox("Basic Project");
+		basicproject_checkbox = new JCheckBox("Basic Project");
 		basicproject_checkbox.setFont(new Font("굴림", Font.BOLD, 12));
 		basicproject_checkbox.setForeground(Color.WHITE);
 		basicproject_checkbox.setBounds(538, 185, 127, 23);
 		basicproject_checkbox.setOpaque(false);
 		signup_panel.add(basicproject_checkbox);
 		
-		JCheckBox expertproject_checkbox = new JCheckBox("Expert Project");
+		expertproject_checkbox = new JCheckBox("Expert Project");
 		expertproject_checkbox.setFont(new Font("굴림", Font.BOLD, 12));
 		expertproject_checkbox.setForeground(Color.WHITE);
 		expertproject_checkbox.setBounds(538, 215, 141, 23);
 		expertproject_checkbox.setOpaque(false);
 		signup_panel.add(expertproject_checkbox);
 		
-		JCheckBox lolgroup_checkbox = new JCheckBox("LOL GROUP");
+		lolgroup_checkbox = new JCheckBox("LOL GROUP");
 		lolgroup_checkbox.setFont(new Font("굴림", Font.BOLD, 12));
 		lolgroup_checkbox.setForeground(Color.WHITE);
 		lolgroup_checkbox.setBounds(538, 245, 115, 23);
 		lolgroup_checkbox.setOpaque(false);
 		signup_panel.add(lolgroup_checkbox);
 		
-		JCheckBox battlegroundgroup_checkbox = new JCheckBox("Battleground GROUP");
+		battlegroundgroup_checkbox = new JCheckBox("Battleground GROUP");
 		battlegroundgroup_checkbox.setFont(new Font("굴림", Font.BOLD, 12));
 		battlegroundgroup_checkbox.setForeground(Color.WHITE);
 		battlegroundgroup_checkbox.setBounds(538, 275, 176, 23);
 		battlegroundgroup_checkbox.setOpaque(false);
 		signup_panel.add(battlegroundgroup_checkbox);
 		
-		JCheckBox etc_checkbox = new JCheckBox("ETC");
+		etc_checkbox = new JCheckBox("ETC");
 		etc_checkbox.setFont(new Font("굴림", Font.BOLD, 12));
 		etc_checkbox.setForeground(Color.WHITE);
 		etc_checkbox.setBounds(538, 305, 141, 23);
@@ -320,6 +327,19 @@ public class MainFrame extends JFrame implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == login_button) {//로그인 화면의 로그인 버튼
+			boolean id_check = connection.showID(login_id_tf.getText());//db에서 id체크
+			if(id_check==false) {
+				signupmessage.showMessageDialog(null, "ID ERROR!");
+				return;
+			}
+			boolean password_check = connection.findPassword(login_id_tf.getText(), login_pw_tf.getText());//db에서 pw체크
+			if(password_check==false) {
+				signupmessage.showMessageDialog(null, "PW ERROR!");
+				return;
+			}
+			login_id = login_id_tf.getText();//로그인 성공 시 id를 필드값에 저장
+			login_nickname = connection.getNickname(login_id);//login_id를 기준으로 한 nickname값을 필드값에 저장
+			login_coin = connection.getCoin(login_id);
 			login_panel.setVisible(false);
 			setTitle("conferencesystem/menu");
 			menu_panel.setVisible(true);
@@ -328,10 +348,47 @@ public class MainFrame extends JFrame implements MouseListener{
 			setTitle("conferencesystem/signup");
 			signup_panel.setVisible(true);
 		}else if(e.getSource() == signup_signup_button) {//회원가입화면의 회원가입 버튼
+			boolean id_check = connection.showID(signup_id_tf.getText());//db에서 id체크
+			if(id_check==true) {//일치하는값이 있다면 중복메세지
+				signupmessage.showMessageDialog(null, "ID가 중복입니다!");
+				return;
+			}
+			if(!signup_pw_tf.getText().equals(pwck_tf.getText())) {//pw와 pwck가 같지 않다면 에러메세지
+				signupmessage.showMessageDialog(null, "PW를 확인해주세요!");
+				return;
+			}
+			boolean nickname_check = connection.showNickname(nickname_tf.getText());
+			if(nickname_check==true) {
+				signupmessage.showMessageDialog(null, "NICKNAME이 중복입니다!");
+				return;
+			}
+			String user_tel = tel_combobox.getSelectedItem().toString() + tel1_tf.getText() + tel2_tf.getText();//전화번호 합치기
+			int g1 = 0, g2 = 0, g3 = 0, g4 = 0, g5 = 0;//그룹의 값 저장할 변수들 / isSelected()=체크되있다면 true반환
+			if(basicproject_checkbox.isSelected() == true) {
+				g1 = 1;
+			}
+			if(expertproject_checkbox.isSelected() == true) {
+				g2 = 1;
+			}
+			if(lolgroup_checkbox.isSelected() == true) {
+				g3 = 1;
+			}
+			if(battlegroundgroup_checkbox.isSelected() == true) {
+				g4 = 1;
+			}
+			if(etc_checkbox.isSelected() == true) {
+				g5 = 1;
+			}
+			boolean signup_check = connection.insertUserdata(signup_id_tf.getText(), signup_pw_tf.getText(), nickname_tf.getText(), user_tel, 
+					g1, g2, g3, g4, g5);//user테이블에 데이터 삽입
+			if(signup_check==false) {
+				signupmessage.showMessageDialog(null, "error");
+				return;
+			}
 			signup_panel.setVisible(false);
 			setTitle("conferencesystem/login");
 			login_panel.setVisible(true);
-			signupmessage.showMessageDialog(null, "Welcome to Conference System");//다이얼로그 생성
+			signupmessage.showMessageDialog(null, "Welcome to Conference System");//회원가입 환영 다이얼로그 생성
 		}else if(e.getSource() == login_id_tf) {//id_tf 클릭시 초기화
 			login_id_tf.setText(null);
 		}else if(e.getSource() == login_pw_tf) {//pw_tf 클릭시 초기화
@@ -387,4 +444,5 @@ public class MainFrame extends JFrame implements MouseListener{
 			set_button.setIcon(setbefore_image);
 		}
 	}
+	
 }
