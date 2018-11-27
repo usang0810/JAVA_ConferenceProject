@@ -31,6 +31,7 @@ public class MenuFrame extends JFrame implements MouseListener{
 	private JPanel menu_panel;
 
 	public MenuFrame(User user, int groupnum){
+		this.user = user;
 		this.groupnum = groupnum;
 		
 		System.out.println(groupnum);
@@ -110,11 +111,11 @@ public class MenuFrame extends JFrame implements MouseListener{
 	public void mousePressed(MouseEvent e) {
 		// Mouse Pressed Event
 		if(e.getSource() == calendar_button) {//calendarfrmae 持失
-			//CalendarFrame calendarframe = new CalendarFrame();
+			CalendarFrame calendarframe = new CalendarFrame(groupnum);
 		}else if(e.getSource() == chat_button) {//conferenceframe 持失
 			//ConferenceFrame conferenceframe = new ConferenceFrame();
 		}else if(e.getSource() == coin_button) {//coinframe 持失
-			//CoinFrame coinframe = new CoinFrame();
+			CoinFrame coinframe = new CoinFrame(this.user);
 		}else if(e.getSource() == set_button) {//setframe 持失
 			//SetFrame setframe = new SetFrame();
 		}else if(e.getSource() == back_button) {

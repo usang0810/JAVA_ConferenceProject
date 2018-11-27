@@ -40,6 +40,7 @@ public class SelectGroupFrame extends JFrame implements MouseListener{
 		setSize(GROUP_WIDTH, GROUP_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		//그룹목록패널 생성

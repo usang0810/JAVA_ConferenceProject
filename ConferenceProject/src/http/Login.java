@@ -69,7 +69,7 @@ public class Login {
 			user.setCoin(Integer.parseInt(data[9]));
 			user.setApplycoin(Integer.parseInt(data[10]));
 			
-			user.printUserinfo();
+			//user.printUserinfo();
 			
 			return user;
 		}
