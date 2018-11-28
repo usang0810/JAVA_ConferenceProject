@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import model.User;
 
 public class MenuFrame extends JFrame implements MouseListener{
-	private User user = null;
+	public static User user = null;
 	public int groupnum;
 	
 	public ImageIcon menubackground_image = new ImageIcon(MainFrame.class.getResource("/images/menu_background.png"));
@@ -34,7 +34,7 @@ public class MenuFrame extends JFrame implements MouseListener{
 		this.user = user;
 		this.groupnum = groupnum;
 		
-		System.out.println(groupnum);
+		//System.out.println(groupnum);
 		
 		setTitle("conferencesystem/menu");
 		setSize(Main.MAIN_WIDTH, Main.MAIN_HEIGHT);
@@ -115,9 +115,10 @@ public class MenuFrame extends JFrame implements MouseListener{
 		}else if(e.getSource() == chat_button) {//conferenceframe 持失
 			//ConferenceFrame conferenceframe = new ConferenceFrame();
 		}else if(e.getSource() == coin_button) {//coinframe 持失
+			System.out.println(this.user.getNickname());
 			CoinFrame coinframe = new CoinFrame(this.user);
 		}else if(e.getSource() == set_button) {//setframe 持失
-			//SetFrame setframe = new SetFrame();
+			SetFrame setframe = new SetFrame(this.user);
 		}else if(e.getSource() == back_button) {
 			this.setVisible(false);
 			new SelectGroupFrame(user);

@@ -13,6 +13,19 @@ public class User {
 	private int coin;
 	private int applycoin;
 	
+	public void setUserinfo(String user_id, String user_pw, String user_nick, String user_tel,
+			int user_g1, int user_g2, int user_g3, int user_g4, int user_g5) {
+		this.user_id = user_id;
+		this.password = user_pw;
+		this.nickname = user_nick;
+		this.tel = user_tel;
+		this.g1 = user_g1;
+		this.g2 = user_g2;
+		this.g3 = user_g3;
+		this.g4 = user_g4;
+		this.g5 = user_g5;
+	}
+	
 	public String getUser_id() {
 		return user_id;
 	}
