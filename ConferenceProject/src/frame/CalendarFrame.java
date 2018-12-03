@@ -39,7 +39,7 @@ public class CalendarFrame extends JFrame implements ActionListener{
 	private JButton right_button = new JButton("▶");
 	private JButton day_button[] = new JButton[31];//최대 31일
 	
-	private JButton save_button, clear_button;
+	private JButton save_button, clear_button, set_button;
 	JComboBox<Integer> year_combobox = new JComboBox<Integer>();
 	DefaultComboBoxModel<Integer> year_model = new DefaultComboBoxModel<Integer>();
 	JComboBox<Integer> month_combobox = new JComboBox<Integer>();
@@ -157,6 +157,13 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		memo_textarea = new JTextArea();
 		memo_textarea.setBounds(10, 47, 208, 280);
 		memo_panel.add(memo_textarea);
+		
+		set_button = new JButton("새로고침");
+		set_button.setBounds(664, 0, 100, 23);
+		main_panel.add(set_button);
+		set_button.setBackground(new Color(100, 200, 200));
+		set_button.setFont(new Font("굴림", Font.BOLD, 12));
+		set_button.addActionListener(this);
 		
 		JLabel background_label = new JLabel();
 		background_label.setBounds(0, 0, CALENDAR_SCREEN_WIDTH, CALENDAR_SCREEN_HEIGHT);
@@ -287,6 +294,8 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		}else if(e.getSource()==clear_button) {
 			//TODO clear_button event
 			memo_textarea.setText(null);
+		}else if(e.getSource()==set_button) {
+			createDayStart();
 		}
 	}
 }

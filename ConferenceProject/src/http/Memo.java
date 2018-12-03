@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import frame.Main;
 
@@ -60,6 +61,9 @@ public class Memo {
 	
 	public String getmemoConnect() throws Exception{
 		URL url = new URL(Main.http+"/getmemo");
+		String charset = "UTF-8";
+		String groupnum = URLEncoder.encode(Integer.toString(this.groupnum), charset);
+		String date = URLEncoder.encode(this.date, charset);
 
 		// HTTP 立加 备窍扁
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -75,7 +79,7 @@ public class Memo {
 		wr.close(); 
 
 		int responseCode = conn.getResponseCode();
-		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		String inputLine; StringBuffer response = new StringBuffer();
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
@@ -94,6 +98,10 @@ public class Memo {
 	
 	public String editmemoConnect() throws Exception{
 		URL url = new URL(Main.http+"/editmemo");
+		String charset = "UTF-8";
+		String groupnum = URLEncoder.encode(Integer.toString(this.groupnum), charset);
+		String date = URLEncoder.encode(this.date, charset);
+		String memo = URLEncoder.encode(this.memo, charset);
 
 		// HTTP 立加 备窍扁
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -109,7 +117,7 @@ public class Memo {
 		wr.close(); 
 
 		int responseCode = conn.getResponseCode();
-		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 		String inputLine; StringBuffer response = new StringBuffer();
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);

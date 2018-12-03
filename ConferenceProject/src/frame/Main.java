@@ -1,13 +1,13 @@
 package frame;
 
 public class Main {
-	public static final int MAIN_WIDTH = 900;//메인프레임 width
-	public static final int MAIN_HEIGHT = 530;//메인프레임 height
-	public static final int SCREEN_WIDTH = 884;//메인프레임 실제width
-	public static final int SCREEN_HEIGHT = 491;//매인프레임 실제height
+	public static final int MAIN_WIDTH = 900;// MainFrame width
+	public static final int MAIN_HEIGHT = 530;// MainFrame height
+	public static final int SCREEN_WIDTH = 884;// MainFrame Screen width
+	public static final int SCREEN_HEIGHT = 491;// MainFrame Screen height
 	public static final String[] GROUP_NAME = 
 		{"Basic Project", "Expert Project", "LOL GROUP", "Battleground GROUP", "ETC"};
-	public static final String http= "http://localhost:8080";
+	public static final String http= "http://182.209.99.31:8080";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

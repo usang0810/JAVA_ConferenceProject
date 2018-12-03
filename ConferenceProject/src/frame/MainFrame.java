@@ -2,9 +2,9 @@ package frame;
 //로그인 패널, 회원가입 패널, 메뉴 패널, 회원정보 수정 패널
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import http.Login;
 import http.Signup;
 import model.User;
 
-public class MainFrame extends JFrame implements MouseListener{
+public class MainFrame extends JFrame implements MouseListener, KeyListener{
 	User user = null;
 	
 	public ImageIcon loginbackground_image= new ImageIcon(MainFrame.class.getResource("/images/login_background.png"));
@@ -74,6 +74,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		login_id_tf.setOpaque(false);//배경 없음
 		login_id_tf.setBorder(null);//테두리 없음
 		login_id_tf.addMouseListener(this);
+		login_id_tf.addKeyListener(this);
 		login_panel.add(login_id_tf);
 		
 		login_pw_tf = new JPasswordField("password");
@@ -83,6 +84,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		login_pw_tf.setOpaque(false);
 		login_pw_tf.setBorder(null);
 		login_pw_tf.addMouseListener(this);
+		login_pw_tf.addKeyListener(this);
 		login_panel.add(login_pw_tf);
 		
 		login_signup_button = new JButton();
@@ -114,7 +116,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		back_button.addMouseListener(this);
 		signup_panel.add(back_button);
 		
-		signup_signup_button = new JButton("New button");
+		signup_signup_button = new JButton();
 		signup_signup_button.setIcon(signupbefore_image);
 		signup_signup_button.setBounds(298, 382, 287, 55);
 		signup_signup_button.setBorderPainted(false);
@@ -374,5 +376,40 @@ public class MainFrame extends JFrame implements MouseListener{
 		}else if(e.getSource() == back_button) {
 			back_button.setIcon(backbefore_image);
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			Login login = new Login();
+			login.setIdPw(login_id_tf.getText(), login_pw_tf.getText());
+			try {
+				user = login.loginConnect();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if(user==null) {
+				signupmessage.showMessageDialog(null, "정보가 일치하지 않습니다!");
+				return;
+			}else {
+				System.out.println("login success");
+				this.setVisible(false);
+				SelectGroupFrame selectgroupframe = new SelectGroupFrame(user);
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

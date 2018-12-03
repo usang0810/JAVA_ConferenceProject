@@ -113,7 +113,7 @@ public class MenuFrame extends JFrame implements MouseListener{
 		if(e.getSource() == calendar_button) {//calendarfrmae 持失
 			CalendarFrame calendarframe = new CalendarFrame(groupnum);
 		}else if(e.getSource() == chat_button) {//conferenceframe 持失
-			//ConferenceFrame conferenceframe = new ConferenceFrame();
+			ConferenceFrame conferenceframe = new ConferenceFrame(this.user, this.groupnum);
 		}else if(e.getSource() == coin_button) {//coinframe 持失
 			System.out.println(this.user.getNickname());
 			CoinFrame coinframe = new CoinFrame(this.user);
