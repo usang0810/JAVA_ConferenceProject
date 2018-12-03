@@ -55,14 +55,12 @@ public class ConferenceFrame extends JFrame implements ActionListener, KeyListen
 	private JLabel userlist_label;
 	public ArrayList<String> nicknamelist = null;
 			
-	public ConferenceFrame(User user, int gourpnum) {
+	public ConferenceFrame(User user, int groupnum) {
 		this.user = user;
 		this.groupnum = groupnum;
 		init(user.getNickname());
 		
-		//System.out.println(Main.GROUP_NAME[this.groupnum-1]);
-		//setTitle("conferencesystem/"+Main.GROUP_NAME[groupnum-1]+"/chatting");
-		setTitle("conferencesystem/chatting");
+		setTitle("conferencesystem/"+Main.GROUP_NAME[groupnum-1]+"/chatting");
 		setSize(CHAT_WIDTH, CHAT_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -175,7 +173,7 @@ public class ConferenceFrame extends JFrame implements ActionListener, KeyListen
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == sms_button) {
-			//SMSFrame smsfrmae = new SMSFrame();
+			SMSFrame smsfrmae = new SMSFrame(this.groupnum);
 		}else if(e.getSource() == send_button) {
 			try {
 				out.writeUTF("[" + user.getNickname() + "] : " +"$"+Integer.toString(this.groupnum)+"$"+send_tf.getText());
@@ -264,11 +262,9 @@ public class ConferenceFrame extends JFrame implements ActionListener, KeyListen
 			while (in != null) {
 				try {
 					String re = in.readUTF();
-					System.out.println(re);
+					//System.out.println(re);
 					String[] text = re.split("\\$");
-					for(int i=0; i<text.length; i++) {
-						System.out.println(i+" = "+text[i]);
-					}
+					//for(int i=0; i<text.length; i++) {System.out.println(i+" = "+text[i]);}
 					int num = Integer.parseInt(text[1]);
 					re = "";
 					for(int i=0; i<text.length; i++) {
@@ -276,21 +272,21 @@ public class ConferenceFrame extends JFrame implements ActionListener, KeyListen
 							continue;
 						}
 						re = re.concat(text[i]);
-						System.out.println(re);
+						//System.out.println(re);
 					}
 					if(num == ConferenceFrame.groupnum) {
 						chatlist_textarea.append(re+"\n");
+						chatlist_textarea.setCaretPosition(chatlist_textarea.getDocument().getLength());
 					}
-					System.out.println(re);
+					//System.out.println(re);
 					list.add(re);
 					if(Thread.interrupted()) {
-						ConferenceFrame.socket.close();
 						break;
 					}
 				} catch (IOException e) {
 				}
 			}
-			System.out.println("Thread exit");
+			//System.out.println("Thread exit");
 		} // run
 	}// end class ClientReceiver
 }

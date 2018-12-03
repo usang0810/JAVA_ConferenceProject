@@ -56,7 +56,7 @@ public class CalendarFrame extends JFrame implements ActionListener{
 	public CalendarFrame(int groupnum) {
 		this.groupnum = groupnum;
 		
-		setTitle("conferencesystem/Calendar");
+		setTitle("conferencesystem/"+Main.GROUP_NAME[groupnum-1]+"/calendar");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 자원 해제 후 종료
 		setSize(CALENDAR_WIDTH, CALENDAR_HEIGHT);
 		main_panel = new JPanel();
@@ -156,6 +156,7 @@ public class CalendarFrame extends JFrame implements ActionListener{
 		
 		memo_textarea = new JTextArea();
 		memo_textarea.setBounds(10, 47, 208, 280);
+		memo_textarea.setLineWrap(true); // 자동 개행
 		memo_panel.add(memo_textarea);
 		
 		set_button = new JButton("새로고침");
